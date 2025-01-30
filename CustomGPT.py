@@ -7,14 +7,25 @@ import string
 import tensorflow as tf
 import numpy as np
 import os
+
 # Download NLTK resources
-nltk.download('punkt')
-nltk.download('wordnet')
-nltk.download('stopwords')
+try:
+    nltk.data.find('tokenizers/punkt')
+    nltk.data.find('tokenizers/punkt_tab')
+    nltk.data.find('corpora/wordnet')
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('punkt')
+    nltk.download('punkt_tab')
+    nltk.download('wordnet')
+    nltk.download('stopwords')
+    nltk.download
+
 # Text preprocessing functions
 lemmatizer = WordNetLemmatizer()
 stemmer = PorterStemmer()
 stop_words = set(stopwords.words('english'))
+
 def preprocess_text(text):
     # Remove punctuation
     text = text.translate(str.maketrans('', '', string.punctuation))
@@ -31,6 +42,7 @@ def preprocess_text(text):
         stem = stemmer.stem(lemma)
         processed_tokens.append(stem)
     return ' '.join(processed_tokens)
+
 # Streamlit app
 st.title("PDF Text Processing and Model Training")
 # File upload
