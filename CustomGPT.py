@@ -21,6 +21,14 @@ except LookupError:
     nltk.download('stopwords')
     nltk.download
 
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+    except RuntimeError as e:
+        print(e)
+        
 # Text preprocessing functions
 lemmatizer = WordNetLemmatizer()
 stemmer = PorterStemmer()
@@ -92,7 +100,7 @@ if uploaded_file:
         ])
         
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-        model.fit(X, y, epochs=50, verbose=0)
+        model.fit(X, y, epochs=50, verbose=0, batch_size=32)
     
     # Model download
     model.save('text_model.h5')
