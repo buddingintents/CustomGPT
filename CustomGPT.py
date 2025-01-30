@@ -18,6 +18,9 @@ nltk.data.path.append('/tmp/nltk_data')
 nltk.download('punkt', download_dir='/tmp/nltk_data')
 nltk.download('wordnet', download_dir='/tmp/nltk_data')
 
+import nltk.data
+print(nltk.data.find('tokenizers/punkt'))
+
 # Preprocessing Functions
 def extract_text_from_pdf(pdf_file):
     text = ""
