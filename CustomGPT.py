@@ -14,8 +14,9 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Embedding, LSTM, Dense
 
-nltk.download("punkt")
-nltk.download("wordnet")
+nltk.data.path.append('/tmp/nltk_data')
+nltk.download('punkt')
+nltk.download('wordnet')
 
 # Preprocessing Functions
 def extract_text_from_pdf(pdf_file):
