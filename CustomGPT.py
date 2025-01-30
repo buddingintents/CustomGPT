@@ -36,7 +36,8 @@ def clean_text(text):
 def lemmatize_and_stem(text):
     lemmatizer = nltk.WordNetLemmatizer()
     stemmer = PorterStemmer()
-    words = word_tokenize(text)
+    #words = word_tokenize(text)
+    words = re.findall(r'\b\w+\b',text.lower())
     processed_words = [stemmer.stem(lemmatizer.lemmatize(word, wordnet.VERB)) for word in words]
     return " ".join(processed_words)
 
